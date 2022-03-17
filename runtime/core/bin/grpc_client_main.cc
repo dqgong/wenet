@@ -20,6 +20,7 @@
 
 DEFINE_string(host, "127.0.0.1", "host of websocket server");
 DEFINE_int32(port, 10086, "port of websocket server");
+DEFINE_int32(sample_rate, 16000, "sample rate");
 DEFINE_int32(nbest, 1, "n-best of decode result");
 DEFINE_string(wav_path, "", "test wav file path");
 DEFINE_bool(continuous_decoding, false, "continuous decoding mode");
@@ -31,9 +32,7 @@ int main(int argc, char *argv[]) {
                            FLAGS_continuous_decoding);
 
   wenet::WavReader wav_reader(FLAGS_wav_path);
-  const int sample_rate = 16000;
-  // Only support 16K
-  CHECK_EQ(wav_reader.sample_rate(), sample_rate);
+  CHECK_EQ(wav_reader.sample_rate(), FLAGS_sample_rate);
   const int num_sample = wav_reader.num_sample();
   std::vector<float> pcm_data(wav_reader.data(),
                               wav_reader.data() + num_sample);
