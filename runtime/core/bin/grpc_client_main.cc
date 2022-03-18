@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
                               wav_reader.data() + num_sample);
   // Send data every 0.5 second
   const float interval = 0.5;
-  const int sample_interval = interval * sample_rate;
+  const int sample_interval = interval * FLAGS_sample_rate;
   for (int start = 0; start < num_sample; start += sample_interval) {
     if (client.done()) {
       break;
